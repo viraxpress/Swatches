@@ -137,4 +137,21 @@ class Swatch extends Template
     {
         return $this->request->getFullActionName();
     }
+
+    /**
+     * Retrieve configuration value from admin settings
+     *
+     * @param string $fieldPath
+     * @param int|null $storeId
+     * @return mixed
+     */
+    public function getConfigValue($fieldPath)
+    {
+        $storeId =  $this->storeManager->getStore()->getId();
+        return $this->scopeConfig->getValue(
+            $fieldPath,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
 }
